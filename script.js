@@ -1,9 +1,9 @@
-function generate() {
-  const specialNumbers = [];
-  while (specialNumbers.length < 24) {
-    const num = Math.floor(Math.random() * 49) + 1;
-    if (!specialNumbers.includes(num)) specialNumbers.push(num);
+
+function predict() {
+  let results = [];
+  while (results.length < 24) {
+    let num = Math.floor(Math.random() * 49) + 1;
+    results.push(num);
   }
-  document.getElementById("result").innerHTML = 
-    '<h2>預測結果</h2><p>' + specialNumbers.join(', ') + '</p>';
+  document.getElementById("result").innerText = "預測號碼（24組）：" + results.join(", ");
 }
