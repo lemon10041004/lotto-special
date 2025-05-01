@@ -1,87 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>特別樂透預測器</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            background-color: white;
-            color: #222;
-            padding: 40px;
-            max-width: 800px;
-            margin: auto;
-        }
-        h1 {
-            text-align: center;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-        }
-        .results {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f7f7f7;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        .group {
-            margin-bottom: 20px;
-        }
-        .group-title {
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>大樂透特別號預測器</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>特別樂透預測器</h1>
-    <p>這次預測針對近期開獎期數：<span id="target-issue">加載中...</span></p>
-    <button onclick="predict()">產生預測號碼</button>
-
-    <div class="results" id="results" style="display:none;">
-        <div class="group" id="group1"></div>
-        <div class="group" id="group2"></div>
-        <div class="group" id="group3"></div>
-        <div class="group" id="group4"></div>
-        <div class="group" id="group5"></div>
-    </div>
-
-    <script>
-        function predict() {
-            const groups = [
-                { title: "高頻出現號碼", numbers: randomNumbers() },
-                { title: "連號機率區", numbers: randomNumbers() },
-                { title: "分散機率區", numbers: randomNumbers() },
-                { title: "熱號追蹤", numbers: randomNumbers() },
-                { title: "冷號補全", numbers: randomNumbers() },
-            ];
-
-            document.getElementById('results').style.display = 'block';
-            groups.forEach((g, i) => {
-                document.getElementById('group' + (i + 1)).innerHTML =
-                    `<div class="group-title">${g.title}</div><div>${g.numbers.join(", ")}</div>`;
-            });
-        }
-
-        function randomNumbers() {
-            const set = new Set();
-            while (set.size < 5) {
-                set.add(Math.floor(Math.random() * 49) + 1);
-            }
-            return Array.from(set).sort((a, b) => a - b);
-        }
-
-        // 模擬抓最近開獎期數（實際可接API）
-        const now = new Date();
-        const weekday = now.getDay();
-        const nextDraw = new Date();
-        nextDraw.setDate(now.getDate() + ((2 - weekday + 7) % 7 || 7)); // 星期二為例
-        const issueText = `${nextDraw.getFullYear()}年${nextDraw.getMonth() + 1}月${nextDraw.getDate()}日`;
-        document.getElementById("target-issue").textContent = issueText;
-    </script>
+  <h1>大樂透特別號預測器</h1>
+  <button onclick="generate()">預測特別號</button>
+  <div id="result"></div>
+  <script src="script.js"></script>
 </body>
 </html>
